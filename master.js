@@ -21,7 +21,7 @@ module.exports = function(app) {
             clearTimeout(timer);
             // console.log(message);
             // run the callback passed along with all the messages with the result as argument
-            if (callback) {
+            if (typeof callback !== 'undefined') {
                 callback(result);
             }
         });
@@ -40,7 +40,7 @@ module.exports = function(app) {
     });
 
     app.post('/js', function(req, res) {
-        console.log(util.inspect(req));
+        // console.log(util.inspect(req));
         var userName = req.body.user_name,
             jsCode = req.body.text;
 

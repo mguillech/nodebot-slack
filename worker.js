@@ -36,7 +36,7 @@ process.on('message', function(jsCode) {
 
     resultFromCall = script.runInNewContext(context);
     unhook();
-    result += "\n*Return:* " + resultFromCall;
+    result += "\n*Return:* " + ((typeof resultFromCall !== 'undefined') ? resultFromCall : "<no return value>");
 
     // Emoji time!
     result += "\nPowered by :node:";
