@@ -39,7 +39,7 @@ process.on('message', function(jsCode) {
     result += "\nReturn: " + resultFromCall;
 
     // Emoji time!
-    result += "Powered by :node:\n";
+    result += "\nPowered by :node:";
 
     // Send the finished message to the parent process
     process.send(result);
