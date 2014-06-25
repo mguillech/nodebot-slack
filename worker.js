@@ -32,7 +32,7 @@ process.on('message', function(jsCode) {
         script = vm.createScript(jsCode);
     }
     catch (error) {
-        process.send(error.message);
+        process.send("*Error:* " + error.message);
         return;
     }
 
@@ -44,13 +44,12 @@ process.on('message', function(jsCode) {
         resultFromCall = script.runInNewContext(context);
     }
     catch(error) {
-        resultFromCall = error.message;
+        unhook(); // unhook our stdout wrapper here too
+        process.send("*Error:* " + error.message);
+        return;
     }
     unhook();
     result += "\n*Return:* " + ((typeof resultFromCall !== 'undefined') ? resultFromCall : "<no return value>");
-
-    // Emoji time!
-    result += "\nPowered by :node:";
 
     // Send the finished message to the parent process
     process.send(result);

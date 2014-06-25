@@ -59,14 +59,14 @@ module.exports = function(app) {
         timer = setTimeout(function() {
             mainWorker.destroy();
             console.log("worker execution expired");
-            res.send({'text': "@" + userName + "\nExecution time expired"});
+            res.send({'text': "@" + userName + "\nExecution time expired\nPowered by :node:"});
         }, 5000);
 
         // parse jsCode
         jsCode = jsCode.split('nodebot:')[1].trim();
 
         callback = function(result) {
-            res.send({'text': "@" + userName + "\n" + result});
+            res.send({'text': "@" + userName + "\n" + result + "\nPowered by :node:"});
         };
 
         mainWorker.send(jsCode); // Send the expression to run on the worker
