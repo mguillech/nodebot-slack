@@ -40,6 +40,7 @@ module.exports = function(app) {
     });
 
     app.post('/js', function(req, res) {
+        console.log(util.inspect(req));
         var userName = req.body.user_name,
             jsCode = req.body.text;
 
