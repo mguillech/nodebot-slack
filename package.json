@@ -1,7 +1,7 @@
 {
-  "name": "nodebot",
+  "name": "nodebot-slack",
   "version": "0.0.1",
-  "description": "nodebot for NodeJSAR",
+  "description": "nodebot for Slack teams",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"

@@ -24,8 +24,8 @@ require('./master')(app);
 if (app.get('env') == 'development') {
     app.use(errorHandler());
 }
-else {      // production error handling
-    app.use(function(err, req, res, next){
+else {
+    app.use(function(err, req, res, next) {
         console.error(err.stack);
         res.send(500, 'Something broke!');
     });
