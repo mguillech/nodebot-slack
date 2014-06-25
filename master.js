@@ -66,7 +66,7 @@ module.exports = function(app) {
         jsCode = jsCode.split('nodebot:')[1].trim();
 
         callback = function(result) {
-            res.send({'text': "@" + userName + ": " + result});
+            res.send({'text': "@" + userName + "\n" + result});
         };
 
         mainWorker.send(jsCode); // Send the expression to run on the worker
