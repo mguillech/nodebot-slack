@@ -59,7 +59,7 @@ module.exports = function(app) {
         timer = setTimeout(function() {
             mainWorker.destroy();
             console.log("worker execution expired");
-            res.send({'text': "@" + userName + "\nExecution time expired\nPowered by :node:"});
+            res.send({'text': "@" + userName + "\n*Error:* Execution time expired\nPowered by :node:"});
         }, 5000);
 
         // parse jsCode
