@@ -1,33 +1,43 @@
+'use strict';
+
+var util = require('util');
+
 // This script will be run separately and listens to incoming messages from the parent process
+function hook_stdout(callback) {
+    var old_write = process.stdout.write;
+
+    process.stdout.write = (function(write) {
+        return function(string, encoding, fd) {
+            write.apply(process.stdout, arguments);
+            callback(string, encoding, fd);
+        }
+    })(process.stdout.write);
+
+    return function() {
+        process.stdout.write = old_write;
+    }
+}
+
 process.on('message', function(jsCode) {
     var vm = require("vm"),
         obj = {'console': console},
-        context = vm.createContext(obj),
-        script = vm.createScript(jsCode),
+        context,
+        script,
         result,
-        resultFromCall;
+        resultFromCall,
+        unhook;
 
-    function hook_stdout(callback) {
-        var old_write = process.stdout.write;
+    context = vm.createContext(obj);
+    script = vm.createScript(jsCode);
 
-        process.stdout.write = (function(write) {
-            return function(string, encoding, fd) {
-                write.apply(process.stdout, arguments);
-                callback(string, encoding, fd);
-            }
-        })(process.stdout.write);
-
-        return function() {
-            process.stdout.write = old_write;
-        }
-    }
-
-    var unhook = hook_stdout(function(string, encoding, fd) {
+    unhook = hook_stdout(function(string, encoding, fd) {
         result = 'Out: ' + string;
     });
 
     resultFromCall = script.runInNewContext(context);
     unhook();
     result += '\nReturn: ' + resultFromCall;
-    process.send(result); //Send the finished message to the parent process
+
+    // Send the finished message to the parent process
+    process.send(result);
 });

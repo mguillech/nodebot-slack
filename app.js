@@ -11,14 +11,14 @@ var express = require("express"),
     http = require('http'),
     app = express();
 
-// Some uses
+// Some middleware
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
 // Require the master (cluster) app
 require('./master')(app);
 
-// development only
+// Development only
 if (app.get('env') == 'development') {
     app.use(errorHandler());
 }
@@ -28,7 +28,6 @@ else {      // production error handling
         res.send(500, 'Something broke!');
     });
 }
-
 
 var port = Number(process.env.PORT || 5000);
 
