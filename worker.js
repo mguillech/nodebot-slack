@@ -23,7 +23,7 @@ process.on('message', function(jsCode) {
         obj = {'console': console},
         context,
         script,
-        result = "Out: <no output>",
+        result = "*Out:* <no output>",
         resultFromCall,
         unhook;
 
@@ -36,7 +36,7 @@ process.on('message', function(jsCode) {
 
     resultFromCall = script.runInNewContext(context);
     unhook();
-    result += "\nReturn: " + resultFromCall;
+    result += "\n*Return:* " + resultFromCall;
 
     // Emoji time!
     result += "\nPowered by :node:";
