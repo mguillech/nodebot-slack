@@ -8,6 +8,10 @@
   },
   "author": "Martín Chikilian <martin.chikilian at gmail dot com>",
   "license": "ISC",
+  "repository" : {
+      "type" : "git",
+      "url" : "http://github.com/mguillech/nodebot-slack.git"
+  },
   "dependencies": {
     "body-parser": "^1.4.3",
     "errorhandler": "^1.1.1",
