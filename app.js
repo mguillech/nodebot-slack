@@ -13,7 +13,9 @@ var express = require("express"),
 
 // Some middleware
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // Require the master (cluster) app
 require('./master')(app);
