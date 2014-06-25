@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Require the master (cluster) app
-require('./master')(app);
+require('./lib/master')(app);
 
 // Development only
 if (app.get('env') == 'development') {
