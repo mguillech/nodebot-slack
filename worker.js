@@ -23,7 +23,7 @@ process.on('message', function(jsCode) {
         obj = {'console': console},
         context,
         script,
-        result,
+        result = 'Out: <no output>',
         resultFromCall,
         unhook;
 
@@ -31,7 +31,7 @@ process.on('message', function(jsCode) {
     script = vm.createScript(jsCode);
 
     unhook = hook_stdout(function(string, encoding, fd) {
-        result = 'Out: ' + string;
+        result = result.replace('<no output>', string);
     });
 
     resultFromCall = script.runInNewContext(context);
