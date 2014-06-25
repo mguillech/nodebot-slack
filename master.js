@@ -44,7 +44,7 @@ module.exports = function(app) {
             jsCode = req.body.text;
 
         // Sanitize input first
-        if (typeof userName === 'undefined' || typeof jsCode === 'undefined' || jsCode.indexOf('>>') === -1) {
+        if (typeof userName === 'undefined' || typeof jsCode === 'undefined' || jsCode.indexOf('nodebot:') === -1) {
             res.send(400);
             return;
         }
@@ -62,7 +62,7 @@ module.exports = function(app) {
         }, 5000);
 
         // parse jsCode
-        jsCode = jsCode.split('>> ')[1].trim();
+        jsCode = jsCode.split('nodebot:')[1].trim();
 
         callback = function(result) {
             res.send({'text': "@" + userName + ": " + result});
