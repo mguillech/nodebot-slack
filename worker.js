@@ -28,13 +28,24 @@ process.on('message', function(jsCode) {
         unhook;
 
     context = vm.createContext(obj);
-    script = vm.createScript(jsCode);
+    try {
+        script = vm.createScript(jsCode);
+    }
+    catch (error) {
+        process.send(error.message);
+        return;
+    }
 
     unhook = hook_stdout(function(string, encoding, fd) {
         result = result.replace('<no output>', string).trim();
     });
 
-    resultFromCall = script.runInNewContext(context);
+    try {
+        resultFromCall = script.runInNewContext(context);
+    }
+    catch(error) {
+        resultFromCall = error.message;
+    }
     unhook();
     result += "\n*Return:* " + ((typeof resultFromCall !== 'undefined') ? resultFromCall : "<no return value>");
 
