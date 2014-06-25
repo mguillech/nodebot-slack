@@ -58,7 +58,7 @@ module.exports = function(app) {
         timer = setTimeout(function() {
             mainWorker.destroy();
             console.log("worker execution expired");
-            res.send(400, 'Invalid command supplied');
+            res.send(400, 'Execution time expired');
         }, 5000);
 
         // parse jsCode
