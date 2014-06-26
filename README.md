@@ -1,7 +1,7 @@
 nodebot-slack
 =============
 
-Bot for Slack teams which runs in Node.js
+Bot for evaluate node.js code inside Slack
 
 Deploy
 ======
@@ -13,3 +13,8 @@ Use
 
 Setup an Outgoing Webhook in Slack pointing to the URL where the nodebot-slack application is running
 using 'nodebot:' as trigger word (without quotes).
+
+Example
+=======
+
+nodebot: console.log("hello world");
